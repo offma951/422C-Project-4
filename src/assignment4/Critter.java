@@ -171,12 +171,48 @@ public abstract class Critter {
 	public static void clearWorld() {
 		// Complete this method.
 	}
-	
+	/**
+	 * Go through one whole timestep of the world
+	 */
 	public static void worldTimeStep() {
 		// Complete this method.
 	}
-	
+
+	/**
+	 * Prints out a grid representation of the current world
+	 */
 	public static void displayWorld() {
-		// Complete this method.
+		System.out.print("+");
+		for(int i = 0; i < Params.world_width; i++)
+			System.out.print("-");
+		System.out.println("+");
+		for(int vert = 0; vert < Params.world_height; vert++) {
+			System.out.print("|");
+			for(int horiz = 0; horiz < Params.world_width; horiz++) {
+				System.out.print(creatureAt(horiz, vert));
+			}
+			System.out.println("|");
+		}
+		System.out.print("+");
+		for(int i = 0; i < Params.world_width; i++)
+			System.out.print("-");
+		System.out.println("+");
+	}
+	/**
+	 * Returns a one character ASCII string representing the specified grid position
+	 * @param horizontal The horiztonal position in the 2D world.
+	 * @param vertical The vertical position in the 2D world.
+	 * @return A string representing the specified grid position.
+	 */
+	private static String creatureAt(int horizontal, int vertical){
+		for(int i = 0; i < population.size(); i++) {
+			if(population.get(i).x_coord == horizontal && population.get(i).y_coord == vertical)
+				return population.get(i).toString();
+		}
+		for(int i = 0; i < babies.size(); i++) {
+			if(babies.get(i).x_coord == horizontal && babies.get(i).y_coord == vertical)
+				return babies.get(i).toString();
+		}
+		return " ";
 	}
 }
