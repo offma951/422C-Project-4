@@ -212,6 +212,7 @@ public abstract class Critter {
 		for (int i = 0; i < Params.world_width; i++)
 			System.out.print("-");
 		System.out.println("+");
+		//
 	}
 
 	/**
