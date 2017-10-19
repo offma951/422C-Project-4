@@ -75,19 +75,20 @@ public class Main {
 		/* Do not alter the code above for your submission. */
 		/* Write your code below. */
 		String[] input;
-		System.out.print("critter>");
-		while (kb.hasNext()) {
+		boolean run_critters = true;
+		while (run_critters) {
+			System.out.print("critter>");
 			input = kb.nextLine().split("\\s+");
 			switch (input[0]) {
 			case "quit":
-				return;
+				run_critters = false;
+				break;
 			case "show":
 				Critter.displayWorld();
 				break;
 			default:
 				System.out.println("That is not a valid input.");
 			}
-			System.out.print("critter>");
 		}
 
 		/* Write your code above */
