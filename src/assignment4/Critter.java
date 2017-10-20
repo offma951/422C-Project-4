@@ -1,14 +1,13 @@
 package assignment4;
 /* CRITTERS Critter.java
  * EE422C Project 4 submission by
- * Replace <...> with your actual data.
- * <Student1 Name>
- * <Student1 EID>
- * <Student1 5-digit Unique No.>
- * <Student2 Name>
- * <Student2 EID>
+ * Roisin Hickey
+ * RMH3522
+ * 16275
+ * Matt Offen
+ * MWO298
  * <Student2 5-digit Unique No.>
- * Slip days used: <0>
+ * Slip days used: 0
  * Fall 2016
  */
 
@@ -60,10 +59,71 @@ public abstract class Critter {
 	private int y_coord;
 
 	protected final void walk(int direction) {
+		//subtract walk energy
+		energy -= Params.walk_energy_cost; 
+		//find new position
+		if(direction == 0) {
+			x_coord += 1;
+		}
+		if(direction == 1) {
+			x_coord += 1;
+			y_coord -= 1;
+		}
+		if(direction == 2) {
+			y_coord -= 1;
+		}
+		if(direction == 3) {
+			x_coord -= 1;
+			y_coord -= 1;
+		}
+		if(direction == 4) {
+			x_coord -= 1;
+		}
+		if(direction == 5) {
+			x_coord -= 1;
+			y_coord += 1;
+		}
+		if(direction == 6) {
+			y_coord += 1;
+		}
+		if(direction == 7) {
+			x_coord += 1;
+			y_coord += 1;
+		}
 	}
 
 	protected final void run(int direction) {
-
+		//subtract run energy
+		energy -= Params.run_energy_cost; 
+		//find new position
+		if(direction == 0) {
+			x_coord += 2;
+		}
+		if(direction == 1) {
+			x_coord += 2;
+			y_coord -= 2;
+		}
+		if(direction == 2) {
+			y_coord -= 2;
+		}
+		if(direction == 3) {
+			x_coord -= 2;
+			y_coord -= 2;
+		}
+		if(direction == 4) {
+			x_coord -= 2;
+		}
+		if(direction == 5) {
+			x_coord -= 2;
+			y_coord += 2;
+		}
+		if(direction == 6) {
+			y_coord += 2;
+		}
+		if(direction == 7) {
+			x_coord += 2;
+			y_coord += 2;
+		}
 	}
 
 	protected final void reproduce(Critter offspring, int direction) {
@@ -223,7 +283,6 @@ public abstract class Critter {
 		for (int i = 0; i < Params.world_width; i++)
 			System.out.print("-");
 		System.out.println("+");
-		//
 	}
 
 	/**
