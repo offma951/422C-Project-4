@@ -5,20 +5,21 @@ public class Critter1 extends Critter {
 	@Override
 	public String toString() { return "1"; }
 	
-	private static final int GENE_TOTAL = 16;
-	private int[] genes = new int[8];
+	private static final int GENE_TOTAL = 24;
+	private int[] genes = new int[4];
 	private int dir;
 	
 	public Critter1() {
-		for (int k = 0; k < 8; k += 1) {
-			genes[k] = GENE_TOTAL / 8;
+		for (int k = 0; k < 4; k += 1) {
+			genes[k] = GENE_TOTAL / 4;
 		}
-		dir = Critter.getRandomInt(8);
+		dir = Critter.getRandomInt(4);
 	}
 
 	@Override
 	public void doTimeStep() {
-		// TODO Auto-generated method stub
+		// Each time step Critter1 will run 2 steps in one of the first 4 directions only
+		run(dir);
 	}
 
 	@Override
