@@ -20,6 +20,32 @@ public class Critter1 extends Critter {
 	public void doTimeStep() {
 		// Each time step Critter1 will run 2 steps in one of the first 4 directions only
 		run(dir);
+		// Discuss rest of method
+		if (getEnergy() > 200) {
+			Critter1 child = new Critter1();
+			for (int k = 0; k < 4; k += 1) {
+				child.genes[k] = this.genes[k];
+			}
+			int g = Critter.getRandomInt(4);
+			while (child.genes[g] == 0) {
+				g = Critter.getRandomInt(4);
+			}
+			child.genes[g] -= 1;
+			g = Critter.getRandomInt(4);
+			child.genes[g] += 1;
+			reproduce(child, Critter.getRandomInt(4));
+		}
+		
+		// Pick a new direction based on our genes
+		int roll = Critter.getRandomInt(GENE_TOTAL);
+		int turn = 0;
+		while (genes[turn] <= roll) {
+			roll = roll - genes[turn];
+			turn = turn + 1;
+		}
+		assert(turn < 4);
+		
+		dir = (dir + turn) % 4;
 	}
 
 	@Override

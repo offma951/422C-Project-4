@@ -18,7 +18,34 @@ public class Critter2 extends Critter {
 
 	@Override
 	public void doTimeStep() {
-		// TODO Auto-generated method stub
+		// Each time step Critter2 will run 2 steps in any of the 8 directions
+		run(dir);
+		// Discuss rest of method
+		if (getEnergy() > 110) {
+			Critter2 child = new Critter2();
+			for (int k = 0; k < 8; k += 1) {
+				child.genes[k] = this.genes[k];
+			}
+			int g = Critter.getRandomInt(8);
+			while (child.genes[g] == 0) {
+				g = Critter.getRandomInt(8);
+			}
+			child.genes[g] -= 1;
+			g = Critter.getRandomInt(8);
+			child.genes[g] += 1;
+			reproduce(child, Critter.getRandomInt(8));
+		}
+		
+		// Pick a new direction based on our genes
+		int roll = Critter.getRandomInt(GENE_TOTAL);
+		int turn = 0;
+		while (genes[turn] <= roll) {
+			roll = roll - genes[turn];
+			turn = turn + 1;
+		}
+		assert(turn < 8);
+		
+		dir = (dir + turn) % 8;
 	}
 
 	@Override
@@ -39,7 +66,7 @@ public class Critter2 extends Critter {
 			total_back += c2.genes[4];
 			total_left += c2.genes[5] + c2.genes[6] + c2.genes[7];
 		}
-		System.out.print("" + critter2s.size() + " total Critter1s    ");
+		System.out.print("" + critter2s.size() + " total Critter2s    ");
 		System.out.print("" + total_straight / (GENE_TOTAL * 0.01 * critter2s.size()) + "% straight   ");
 		System.out.print("" + total_back / (GENE_TOTAL * 0.01 * critter2s.size()) + "% back   ");
 		System.out.print("" + total_right / (GENE_TOTAL * 0.01 * critter2s.size()) + "% right   ");
