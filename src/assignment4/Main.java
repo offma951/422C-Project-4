@@ -80,6 +80,23 @@ public class Main {
 			System.out.print("critter>");
 			input = kb.nextLine().split("\\s+");
 			switch (input[0]) {
+			case "make":
+				int quantity = 1;
+				if(input.length > 2){
+					try {
+						quantity = Integer.parseInt(input[2]);
+					} catch(Exception e) {
+						System.out.println(input[2] + " is not a valid quantity.");
+						break;
+					}
+				}
+				for(int i = 0; i < quantity; i++)
+					try {
+						Critter.makeCritter(input[1]);
+					} catch (InvalidCritterException e) {
+						System.out.println("\"" + input[1] + "\" is not a valid critter name.");
+					}
+				break;
 			case "quit":
 				run_critters = false;
 				break;

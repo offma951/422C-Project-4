@@ -12,6 +12,7 @@ package assignment4;
  * Fall 2016
  */
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 /* see the PDF for descriptions of the methods and fields in this class
@@ -84,7 +85,16 @@ public abstract class Critter {
 	 * @throws InvalidCritterException
 	 */
 	public static void makeCritter(String critter_class_name) throws InvalidCritterException {
-		//Critter new_critter = new Class.forName(critter_class_name);
+		Critter c = null;
+		try {
+			c = (Critter) Class.forName("assignment4." +critter_class_name).getConstructor().newInstance();
+		} catch (Exception e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
+		c.x_coord = getRandomInt(Params.world_width);
+		c.y_coord = getRandomInt(Params.world_height);
+		c.energy = Params.world_height;
+		babies.add(c);
 	}
 
 	/**
@@ -183,7 +193,8 @@ public abstract class Critter {
 	 * Clear the world of all critters, dead and alive
 	 */
 	public static void clearWorld() {
-		// Complete this method.
+		population = new java.util.ArrayList<Critter>();
+		babies = new java.util.ArrayList<Critter>();
 	}
 
 	/**
